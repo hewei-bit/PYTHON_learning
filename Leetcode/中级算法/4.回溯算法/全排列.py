@@ -31,25 +31,28 @@ from typing import List
 
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        res = []
-        size = len(nums)
-        used = [False for _ in range(size)]
-        depth = 0
-        path = []
-
-        def dfs(nums: List[int], path: List[int], used: List, depth: int, size: int, res: List[int]):
+        def dfs(nums, size, depth, path, used, res):
             if depth == size:
                 res.append(path[:])
                 return
+
             for i in range(size):
                 if not used[i]:
                     used[i] = True
                     path.append(nums[i])
-                    dfs(nums, path, used, depth + 1, size, res)
+
+                    dfs(nums, size, depth + 1, path, used, res)
+
                     used[i] = False
                     path.pop()
 
-        dfs(nums, path, used, depth, size, res)
+        size = len(nums)
+        if len(nums) == 0:
+            return []
+
+        used = [False for _ in range(size)]
+        res = []
+        dfs(nums, size, 0, [], used, res)
         return res
 
 
@@ -58,3 +61,6 @@ if __name__ == '__main__':
     solution = Solution()
     res = solution.permute(nums)
     print(res)
+
+
+

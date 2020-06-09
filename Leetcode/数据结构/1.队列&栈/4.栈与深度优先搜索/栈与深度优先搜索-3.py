@@ -133,4 +133,3 @@ if __name__ == '__main__':
     order = g.depth_first_search(1)
     print("非递归DFS")
     order = g.depth_first_search2(1)
-
