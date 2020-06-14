@@ -1,3 +1,4 @@
+from typing import List
 
 
 class TreeNode:
@@ -6,11 +7,12 @@ class TreeNode:
         self.left = None
         self.right = None
 
+
 class Solution:
     def postorderTraversal(self, root: TreeNode) -> List[int]:
         if root is None:
             return []
-        res =[]
+        res = []
         stack1 = []
         stack2 = []
         node = root
@@ -26,4 +28,16 @@ class Solution:
             res.append(stack2.pop().val)
         return res
 
-    def solution2(self,root:TreeNode):
+
+if __name__ == '__main__':
+    n1 = TreeNode(1)
+    n2 = TreeNode(2)
+    n3 = TreeNode(3)
+    n4 = TreeNode(4)
+    n5 = TreeNode(5)
+    n1.left = n2
+    n1.right = n3
+    n2.left = n4
+    n2.right = n5
+    obj = Solution().postorderTraversal(n1)
+    print(obj)

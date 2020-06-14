@@ -6,7 +6,6 @@ class Graph(object):
         self.visited = {}
 
     def add_nodes(self, nodelist):
-
         for node in nodelist:
             self.add_node(node)
 

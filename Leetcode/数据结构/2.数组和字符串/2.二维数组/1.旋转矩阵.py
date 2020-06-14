@@ -56,11 +56,24 @@ class Solution2:
                 temp = matrix[i][j]
                 matrix[i][j] = matrix[n - 1 - j][i]
                 matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j]
-                matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1-i]
-                matrix[j][n - 1-i] = temp
+                matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i]
+                matrix[j][n - 1 - i] = temp
+
+
+class Solution3:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        n = len(matrix)
+        # 水平翻转
+        for i in range(n // 2):
+            for j in range(n):
+                matrix[i][j], matrix[n - i - 1][j] = matrix[n - i - 1][j], matrix[i][j]
+        # 主对角线翻转
+        for i in range(n):
+            for j in range(i):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
 
 
 if __name__ == '__main__':
     l = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    obj = Solution2().rotate(l)
+    Solution2().rotate(l)
     print(l)
