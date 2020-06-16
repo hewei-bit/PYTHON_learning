@@ -27,6 +27,7 @@ class Solution:
 
         return helper(root.left, root.right)
 
+
 if __name__ == '__main__':
     root = TreeNode(3)
     root.left = TreeNode(20)

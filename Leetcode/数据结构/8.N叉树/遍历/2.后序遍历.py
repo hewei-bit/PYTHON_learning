@@ -2,6 +2,7 @@
 589
 # Definition for a Node.
 """
+
 from typing import List
 
 
@@ -10,7 +11,8 @@ class Node:
         self.val = val
         self.children = children
 
-#非递归
+
+# 非递归
 class Solution1(object):
     def postorder(self, root):
         """
@@ -28,7 +30,8 @@ class Solution1(object):
                 stack.append(child)
         return res[::-1]
 
-#递归
+
+# 递归
 class Solution2:
     def postorder(self, root: 'Node') -> List[int]:
         result = []
@@ -43,7 +46,3 @@ class Solution2:
 
         postHelper(root)
         return result
-
-
-
-

@@ -2,7 +2,65 @@ from collections import deque
 from typing import List
 
 
-class Solution:
+# DFS非递归
+class Solution1:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        directions = [(-1, 0), (0, -1), (1, 0), (0, 1)]
+        if not grid:
+            return 0
+        m = len(grid)
+        n = len(grid[0])
+        marked = [[False for _ in range(n)] for _ in range(m)]
+        count = 0
+        stack = []
+        for i in range(m):
+            for j in range(n):
+                if not marked[i][j] and grid[i][j] == '1':
+                    count += 1
+                    stack.append((i, j))
+                    marked[i][j] = True
+                    while stack:
+                        cur_x, cur_y = stack.pop()
+                        for direction in directions:
+                            new_x = cur_x + direction[0]
+                            new_y = cur_y + direction[1]
+                            if 0 <= new_x < m and 0 <= new_y < n and not marked[new_x][new_y] and grid[new_x][
+                                new_y] == '1':
+                                stack.append((new_x, new_y))
+                                marked[new_x][new_y] = True
+        return count
+
+#DFS递归
+class Solution2:
+    def numIslands(self, grid: List[List[str]]) -> int:
+
+        if not grid:
+            return 0
+        m = len(grid)
+        n = len(grid[0])
+        marked = [[False for _ in range(n)] for _ in range(m)]
+        count = 0
+
+        for i in range(m):
+            for j in range(n):
+                if not marked[i][j] and grid[i][j] == '1':
+                    count += 1
+                    self.dfs(grid, i, j, m, n, marked)
+        return count
+
+    def dfs(self, grid, i, j, m, n, marked):
+        directions = [(-1, 0), (0, -1), (1, 0), (0, 1)]
+        marked[i][j] = True
+        for direction in directions:
+            new_x = i + direction[0]
+            new_y = j + direction[1]
+            if 0 <= new_x < m and 0 <= new_y < n and not marked[new_x][new_y] and grid[new_x][new_y] == '1':
+                marked[new_x][new_y] = True
+                self.dfs(grid,new_x,new_y,m,n,marked)
+
+
+# BFS
+class Solution3:
     def numIslands(self, grid: List[List[str]]) -> int:
         directions = [(-1, 0), (0, -1), (1, 0), (0, 1)]
         m = len(grid)
