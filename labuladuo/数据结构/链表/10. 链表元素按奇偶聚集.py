@@ -28,7 +28,8 @@ class ListNode:
 
 class Solution:
     def oddEvenList(self, head: ListNode) -> ListNode:
-        if head is None: return head
+        if not head:
+            return head
         odd = head
         even = head.next
         evenHead = even

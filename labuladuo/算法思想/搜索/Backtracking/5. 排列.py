@@ -37,15 +37,22 @@ class Solution:
         depth = 0
         path = []
 
+        #路径：记录在track中
+        #选择列表：nums中不存在于track的那些元素
+        #结束条件：nums中的元素全都在track中出现
         def dfs(nums: List[int], path: List[int], used: List, depth: int, size: int, res: List[int]):
             if depth == size:
                 res.append(path[:])
                 return
             for i in range(size):
+                #排除已做选择
                 if not used[i]:
+                    #做选择
                     used[i] = True
                     path.append(nums[i])
+                    #进入下一层
                     dfs(nums, path, used, depth + 1, size, res)
+                    #撤销选择
                     used[i] = False
                     path.pop()
 

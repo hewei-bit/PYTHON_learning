@@ -29,8 +29,7 @@ class Solution2:
     def preorder(self, root: Node) -> List[int]:
         if not root:
             return []
-        res = []
-        res.append(root.val)
+        res = [root.val]
         if root.children:
             for item in root.children:
                 res += self.preorder(item)
