@@ -30,7 +30,8 @@ class Solution1:
                                 marked[new_x][new_y] = True
         return count
 
-#DFS递归
+
+# DFS递归
 class Solution2:
     def numIslands(self, grid: List[List[str]]) -> int:
 
@@ -56,7 +57,7 @@ class Solution2:
             new_y = j + direction[1]
             if 0 <= new_x < m and 0 <= new_y < n and not marked[new_x][new_y] and grid[new_x][new_y] == '1':
                 marked[new_x][new_y] = True
-                self.dfs(grid,new_x,new_y,m,n,marked)
+                self.dfs(grid, new_x, new_y, m, n, marked)
 
 
 # BFS

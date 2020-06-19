@@ -18,3 +18,4 @@ class Solution:
 
 if __name__ == '__main__':
     obj = Solution().numSquares(12)
+    print(obj)
