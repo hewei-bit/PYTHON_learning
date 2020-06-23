@@ -1,34 +1,37 @@
 # 一、斐波那契数列
 # 1、暴力递归
-def fib1(N: int):
-    if N == 1 or N == 2:
-        return 1
-    return fib1(N - 1) + fib1(N - 2)
+class Solution1:
+    def fib1(self, N: int):
+        if N == 1 or N == 2:
+            return 1
+        return self.fib1(N - 1) + self.fib1(N - 2)
 
 
 # 2、带备忘录的递归解法
-def fib2(N: int):
-    if N < 1: return 0
-    memo = [0] * (N + 1)
-    return help(memo, N)
+class Solution2:
+    def fib2(self, N: int):
+        if N < 1:
+            return 0
+        memo = [0] * (N + 1)
+        return help(memo, N)
 
-
-def help(memo: list, N: int):
-    if N == 1 or N == 2:
-        return 1
-    if memo[N] != 0:
+    def help(self, memo: list, N: int):
+        if N == 1 or N == 2:
+            return 1
+        if memo[N] != 0:
+            return memo[N]
+        memo[N] = help(memo, N - 1) + help(memo, N - 2)
         return memo[N]
-    memo[N] = help(memo, N - 1) + help(memo, N - 2)
-    return memo[N]
 
 
 # 3、dp 数组的迭代解法
-def fib3(N: int):
-    dp = [0] * (N + 1)
-    dp[1] = dp[2] = 1
-    for i in range(3, N + 1):
-        dp[i] = dp[i - 1] + dp[i - 2]
-    return dp[N]
+class Solution3:
+    def fib3(self, N: int):
+        dp = [0] * (N + 1)
+        dp[1] = dp[2] = 1
+        for i in range(3, N + 1):
+            dp[i] = dp[i - 1] + dp[i - 2]
+        return dp[N]
 
 
 # print(fib3(20))
@@ -47,58 +50,65 @@ for 状态1 in 状态1的所有取值：
 
 # 二、凑零钱问题
 # 1、暴力递归
-def coinChange1(coins: list, amount: int):
-    def dp(n):
-        # base case
-        if n == 0: return 0
-        if n < 0: return -1
-        # 求最小值，所以初始化为正无穷
-        res = float('INF')
-        for coin in coins:
-            subproblem = dp(n - coin)
-            # 子问题无解，跳过
-            if subproblem == -1: continue
-            res = min(res, 1 + subproblem)
+class Solution1_1:
+    def coinChange1(self,coins: list, amount: int):
+        def dp(n):
+            # base case
+            if n == 0:
+                return 0
+            if n < 0:
+                return -1
+            # 求最小值，所以初始化为正无穷
+            res = float('INF')
+            for coin in coins:
+                subproblem = dp(n - coin)
+                # 子问题无解，跳过
+                if subproblem == -1: continue
+                res = min(res, 1 + subproblem)
 
-        return res if res != float('INF') else -1
+            return res if res != float('INF') else -1
 
-    return dp(amount)
+        return dp(amount)
 
 
 # 2、带备忘录的递归解法
-def coinChange2(coins: list, amount: int):
-    memo = dict()
+class Solution1_2:
+    def coinChange2(self,coins: list, amount: int):
+        memo = dict()
 
-    def dp(n):
-        # base case
-        if n == 0: return 0
-        if n < 0: return -1
-        # 求最小值，所以初始化为正无穷
-        res = float('INF')
-        for coin in coins:
-            subproblem = dp(n - coin)
-            # 子问题无解，跳过
-            if subproblem == -1: continue
-            res = min(res, 1 + subproblem)
+        def dp(n):
+            # base case
+            if n == 0:
+                return 0
+            if n < 0:
+                return -1
+            # 求最小值，所以初始化为正无穷
+            res = float('INF')
+            for coin in coins:
+                subproblem = dp(n - coin)
+                # 子问题无解，跳过
+                if subproblem == -1: continue
+                res = min(res, 1 + subproblem)
 
-        memo[n] = res if res != float('INF') else -1
-        return memo[n]
+            memo[n] = res if res != float('INF') else -1
+            return memo[n]
 
-    return dp(amount)
+        return dp(amount)
 
 
 # 3、dp 数组的迭代解法
-def coinChange3(coins: list, amount: int):
-    dp = [amount + 1] * (amount + 1)
-    dp[0] = 0
-    for i in range(len(dp)):
-        for coin in coins:
-            if (i - coin) < 0:
-                continue
-            dp[i] = min(dp[i], 1 + dp[i - coin])
-    return -1 if (dp[amount] == amount + 1) else dp[amount]
+class Solution1_3:
+    def coinChange3(self,coins: list, amount: int):
+        dp = [amount + 1] * (amount + 1)
+        dp[0] = 0
+        for i in range(len(dp)):
+            for coin in coins:
+                if (i - coin) < 0:
+                    continue
+                dp[i] = min(dp[i], 1 + dp[i - coin])
+        return -1 if (dp[amount] == amount + 1) else dp[amount]
 
 
 coins = [1, 2, 5]
 amount = 11
-print(coinChange3(coins, amount))
+print(Solution1_1().coinChange3(coins, amount))

@@ -1,18 +1,34 @@
 from queue import Queue
 
 
-def BFS(adj, start):
-    visited = set()
-    q = Queue()
-    q.put(start)
-    while not q.empty():
-        u = q.get()
-        print(u)
-        for v in adj.get(u, []):
-            if v not in visited:
-                visited.add(v)
-                q.put(v)
+class Node:
+    def __init__(self, val=0, neighbours=[]):
+        self.val = val
+        self.neighbours = neighbours
 
 
-graph = {1: [4, 2], 2: [3, 4], 3: [4], 4: [5]}
-BFS(graph, 1)
+class Solution:
+    def BFS(self, node: Node) -> Node:
+        visited = set()
+        queue = [node]
+        while queue:
+            tmp = queue.pop(0)
+            print(tmp.val)
+            for v in tmp.neighbours:
+                if v not in visited:
+                    visited.add(v)
+                    queue.append(v)
+
+
+if __name__ == '__main__':
+    a = Node(1)
+    b = Node(2)
+    c = Node(3)
+    d = Node(4)
+    e = Node(5)
+    a.neighbours = [b, d]
+    b.neighbours = [c, d]
+    c.neighbours = [d]
+    d.neighbours = [e]
+
+    Solution().BFS(a)
