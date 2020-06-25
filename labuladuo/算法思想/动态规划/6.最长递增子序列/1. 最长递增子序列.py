@@ -1,5 +1,6 @@
 """
 300. Longest Increasing Subsequence (Medium)
+
 """
 
 
@@ -10,7 +11,11 @@ class Solution:
         for i in range(len(nums)):
             for j in range(i):
                 if nums[j] < nums[i]:
-                    dp[i] = max(dp[i], dp[j + 1])
+                    dp[i] = max(dp[i], dp[j]+1)
+        res = 0
+        for i in range(len(dp)):
+            res = max(dp[i],res)
+        return res
 
 
 # Dynamic programming + Dichotomy.
@@ -29,3 +34,8 @@ class Solution1:
                 res += 1
         return res
 
+
+if __name__ == '__main__':
+    l = [12,34,54,6,67]
+    obj = Solution().lengthOfLIS(l)
+    print(obj)

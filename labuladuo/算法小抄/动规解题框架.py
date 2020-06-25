@@ -63,7 +63,8 @@ class Solution1_1:
             for coin in coins:
                 subproblem = dp(n - coin)
                 # 子问题无解，跳过
-                if subproblem == -1: continue
+                if subproblem == -1:
+                    continue
                 res = min(res, 1 + subproblem)
 
             return res if res != float('INF') else -1

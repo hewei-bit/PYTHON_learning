@@ -1,9 +1,12 @@
-import math
+from typing import List
 
+from heapq import *
+
+from random import shuffle
 class Solution:
     def getLeastNumbers(self, nums: List[int], k: int) -> List[int]:
-        if k == 0: return []
-
+        if k == 0:
+            return []
         n, opposite = len(nums), [-1 * x for x in nums[:k]]
         heapq.heapify(opposite)
         for i in range(k, len(nums)):
