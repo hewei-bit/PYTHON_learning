@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
 
-'''
+"""
 This module provides an access to the HITRAN data.
 Data is downloaded and cached.
 
 This module serves as a simple database manager front end.
 
 API is aimed to be RESTful, which means that interaction
-between local API and remote data-server will be held 
+between local API and remote data-server will be held
 via sending RESTful queries (API->remote) and
 receiving data preferably in text format (remote->API).
 
 Object are supposed to be implemented by structures/dicts
 as they are present in almost any programming language.
 
-Trying to retain functional style for this API. 
-'''
+Trying to retain functional style for this API.
+"""
 
 import sys
 import json
