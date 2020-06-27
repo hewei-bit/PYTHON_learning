@@ -1,3 +1,5 @@
+#!D:\PyCharm 2019.3.3 Python
+# coding=utf-8
 """
 70. Climbing Stairs (Easy)
 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
@@ -38,7 +40,8 @@ class Solution:
 
         return max(n, res)  # 返回n和res中较大的那个
 
+if __name__ == '__main__':
 
-aaa = Solution()
-ccc = aaa.climbStairs(10)
-bbb = aaa.climbStairs2(10)
+    aaa = Solution()
+    ccc = aaa.climbStairs(10)
+    bbb = aaa.climbStairs2(10)

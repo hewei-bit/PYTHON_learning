@@ -12,6 +12,7 @@
      偷窃到的最高金额 = 1 + 3 = 4 。
 
 """
+from typing import List
 
 
 class Solution:
@@ -37,4 +38,24 @@ class Solution:
         return pre1
 
 
+class Solution2:
 
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        memo = [-1] * n
+        return self.dp(nums, 0, memo)
+
+    def dp(self, nums: List[int], start, memo: list):
+        if start >= len(nums):
+            return 0
+        if memo[start] != -1:
+            return memo[start]
+        res = max(self.dp(nums, start + 1, memo), nums[start] + self.dp(nums, start + 2, memo))
+        memo[start] = res
+        return res
+
+
+if __name__ == '__main__':
+    l = [1, 2, 3, 1]
+    obj = Solution2().rob(l)
+    print(obj)
