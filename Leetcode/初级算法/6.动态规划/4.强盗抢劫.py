@@ -16,7 +16,8 @@
 from typing import List
 
 
-class Solution:
+# 常规
+class Solution1:
     def rob(self, nums: List[int]) -> int:
         return self.dp(nums, 0)
 
@@ -26,7 +27,51 @@ class Solution:
         res = max(self.dp(nums, start + 1), nums[start] + self.dp(nums, start + 2))
         return res
 
+
+# 带备忘录
+class Solution2:
+    def rob(self, nums: List[int]) -> int:
+        length = len(nums)
+        memo = [-1] * length
+        return self.dp(nums, 0, memo)
+
+    def dp(self, nums: List[int], start: int, memo: List[int]) -> int:
+        if start >= len(nums):
+            return 0
+        if memo[start] != -1:
+            return memo[start]
+        res = max(self.dp(nums, start + 1, memo), self.dp(nums, start + 2, memo) + nums[start])
+        memo[start] = res
+        return res
+
+
+# 自底而上
+class Solution3:
+    def rob(self, nums: List[int]) -> int:
+        N = len(nums)
+        if N == 0:
+            return 0
+        robbed = [0] * (N + 1)
+        robbed[0] = 0
+        robbed[1] = nums[0]
+        for i in range(2, N + 1):
+            robbed[i] = max(robbed[i - 1], robbed[i - 2] + nums[i - 1])
+        return robbed[i]
+
+
+# 自底而上化简
+class Solution4:
+    def rob(self, nums: List[int]) -> int:
+        pre1 = 0
+        pre2 = 0
+        for i in range(len(nums)):
+            cur = max(pre2 + nums[i], pre1)
+            pre2 = pre1
+            pre1 = cur
+        return pre1
+
+
 if __name__ == '__main__':
-    l = [1,2,3,1]
-    obj = Solution().rob(l)
+    l = [1, 2, 3, 1]
+    obj = Solution3().rob(l)
     print(obj)

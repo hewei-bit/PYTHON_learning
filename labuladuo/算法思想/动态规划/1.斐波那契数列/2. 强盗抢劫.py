@@ -12,12 +12,42 @@
      偷窃到的最高金额 = 1 + 3 = 4 。
 
 """
+
 from typing import List
 
 
-class Solution:
-    def rob(self, nums: list) -> int:
+# 常规
+class Solution1:
+    def rob(self, nums: List[int]) -> int:
+        return self.dp(nums, 0)
 
+    def dp(self, nums: List[int], start):
+        if start >= len(nums):
+            return 0
+        res = max(self.dp(nums, start + 1), nums[start] + self.dp(nums, start + 2))
+        return res
+
+
+# 带备忘录
+class Solution2:
+    def rob(self, nums: List[int]) -> int:
+        length = len(nums)
+        memo = [-1] * length
+        return self.dp(nums, 0, memo)
+
+    def dp(self, nums: List[int], start: int, memo: List[int]) -> int:
+        if start >= len(nums):
+            return 0
+        if memo[start] != -1:
+            return memo[start]
+        res = max(self.dp(nums, start + 1, memo), self.dp(nums, start + 2, memo) + nums[start])
+        memo[start] = res
+        return res
+
+
+# 自底而上
+class Solution3:
+    def rob(self, nums: List[int]) -> int:
         N = len(nums)
         if N == 0:
             return 0
@@ -26,9 +56,12 @@ class Solution:
         robbed[1] = nums[0]
         for i in range(2, N + 1):
             robbed[i] = max(robbed[i - 1], robbed[i - 2] + nums[i - 1])
-        return robbed[N]
+        return robbed[i]
 
-    def rob2(self, nums: list) -> int:
+
+# 自底而上化简
+class Solution4:
+    def rob(self, nums: List[int]) -> int:
         pre1 = 0
         pre2 = 0
         for i in range(len(nums)):
@@ -38,24 +71,7 @@ class Solution:
         return pre1
 
 
-class Solution2:
-
-    def rob(self, nums: List[int]) -> int:
-        n = len(nums)
-        memo = [-1] * n
-        return self.dp(nums, 0, memo)
-
-    def dp(self, nums: List[int], start, memo: list):
-        if start >= len(nums):
-            return 0
-        if memo[start] != -1:
-            return memo[start]
-        res = max(self.dp(nums, start + 1, memo), nums[start] + self.dp(nums, start + 2, memo))
-        memo[start] = res
-        return res
-
-
 if __name__ == '__main__':
     l = [1, 2, 3, 1]
-    obj = Solution2().rob(l)
+    obj = Solution3().rob(l)
     print(obj)
