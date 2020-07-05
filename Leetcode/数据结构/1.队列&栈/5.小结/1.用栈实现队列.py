@@ -32,8 +32,8 @@ class UseStackToQueue:
         else:
             return False
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     obj = UseStackToQueue()
     x, y, z = 2, 3, 4
     obj.push(x)

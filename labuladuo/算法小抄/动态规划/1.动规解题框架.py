@@ -51,7 +51,7 @@ for 状态1 in 状态1的所有取值：
 # 二、凑零钱问题
 # 1、暴力递归
 class Solution1_1:
-    def coinChange1(self,coins: list, amount: int):
+    def coinChange(self,coins: list, amount: int):
         def dp(n):
             # base case
             if n == 0:
@@ -74,7 +74,7 @@ class Solution1_1:
 
 # 2、带备忘录的递归解法
 class Solution1_2:
-    def coinChange2(self,coins: list, amount: int):
+    def coinChange(self,coins: list, amount: int):
         memo = dict()
 
         def dp(n):
@@ -99,7 +99,7 @@ class Solution1_2:
 
 # 3、dp 数组的迭代解法
 class Solution1_3:
-    def coinChange3(self,coins: list, amount: int):
+    def coinChange(self,coins: list, amount: int):
         dp = [amount + 1] * (amount + 1)
         dp[0] = 0
         for i in range(len(dp)):
@@ -112,4 +112,4 @@ class Solution1_3:
 
 coins = [1, 2, 5]
 amount = 11
-print(Solution1_1().coinChange3(coins, amount))
+print(Solution1_1().coinChange(coins, amount))

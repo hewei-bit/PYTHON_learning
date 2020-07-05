@@ -21,13 +21,15 @@
 """
 from typing import List
 
+
 class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
 
-#暴力递归超时！！！！
+
+# 暴力递归超时！！！！
 class Solution1:
     def rob(self, root: TreeNode) -> int:
         if not root:
@@ -38,6 +40,7 @@ class Solution1:
         if root.right is not None:
             money += (self.rob(root.right.left) + self.rob(root.right.right))
         return max(money, self.rob(root.left) + self.rob(root.right))
+
 
 class Solution2:
     def dp(self, root: TreeNode) -> [List[int], list]:
@@ -53,10 +56,6 @@ class Solution2:
         if not root:
             return 0
         return max(self.dp(root))  # 取root节点偷或不偷的最大值
-
-
-
-
 
 
 if __name__ == '__main__':

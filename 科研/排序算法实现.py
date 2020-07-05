@@ -122,10 +122,10 @@ class sort:
     3.再对左右区间递归执行第二步，直至各区间只有一个数。
     """
 
-    def quick_sort(self,ary):
+    def quick_sort(self, ary):
         return self.qsort(ary, 0, len(ary) - 1)
 
-    def qsort(self,ary, start, end):
+    def qsort(self, ary, start, end):
         if start < end:
             left = start
             right = end
