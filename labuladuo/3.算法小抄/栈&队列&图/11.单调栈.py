@@ -13,7 +13,7 @@
 
 
 def nextGreaterElement(nums: list):
-    ans = [0] * len(nums)# 存放答案的数组
+    ans = [0] * len(nums)  # 存放答案的数组
     stack = []
     for i in range(len(nums), -1, -1):
         while stack and stack[-1] < nums[i]:
