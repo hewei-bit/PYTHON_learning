@@ -52,9 +52,25 @@ class Solution1:
 # 广度优先搜索
 class Solution2:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
-        pass
-
+        color = image[sr][sc]
+        if color == newColor:
+            return image
+        queue = [(sr, sc)]
+        image[sr][sc] = newColor
+        vx = [0, 0, 1, -1]
+        vy = [1, -1, 0, 0]
+        while queue:
+            pos = queue.pop(0)
+            for i in range(4):
+                r = pos[0] + vy[i]
+                c = pos[1] + vx[i]
+                if r >= len(image) or r < 0 or c >= len(image[0]) or c < 0:
+                    continue
+                if image[r][c] == color:
+                    image[r][c] = newColor
+                    queue.append((r, c))
+        return image
 
 if __name__ == '__main__':
     a = [[1, 1, 1], [1, 1, 0], [1, 0, 1]]
-    obj = Solution1().floodFill(a, 1, 1, 2)
+    obj = Solution2().floodFill(a, 1, 1, 2)

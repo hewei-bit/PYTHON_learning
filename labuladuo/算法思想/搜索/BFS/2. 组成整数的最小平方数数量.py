@@ -31,4 +31,4 @@ class node:
 class Solution:
     def numSquares(self, n: int) -> int:
         queue = [node(n)]
-        visi
+
