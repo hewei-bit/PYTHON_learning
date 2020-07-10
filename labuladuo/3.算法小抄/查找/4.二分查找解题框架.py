@@ -66,9 +66,8 @@ class Solution3:
                 left = mid
             else:
                 right = mid
-        if nums[left] == target: return left
-        if nums[right] == target: return right
-
+        if nums[left] == target:return left
+        if nums[right] == target:return right
 
 if __name__ == '__main__':
     ll = [1, 20, 20, 21, 22, 234, 356]
