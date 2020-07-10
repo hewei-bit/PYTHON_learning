@@ -18,6 +18,6 @@ class Solution:
             return
         root = TreeNode(postorder[-1])
         root_id = inorder.index(postorder[-1])
-        root.left = self.buildTree(inorder[:root_id],postorder[:root_id])
-        root.right = self.buildTree(inorder[root_id+1:],postorder[root_id:-1])
+        root.left = self.buildTree(inorder[:root_id], postorder[:root_id])
+        root.right = self.buildTree(inorder[root_id + 1:], postorder[root_id:-1])
         return root
