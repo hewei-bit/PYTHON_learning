@@ -13,20 +13,22 @@
 
 """
 from typing import List
+
+
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
         if not nums:
             return 0
-        left,right = 0,len(nums)-1
+        left, right = 0, len(nums) - 1
         while left < right:
-            mid = left + (right - left)//2
-            if nums[mid] < nums[mid+1]:
-                left = mid+1
+            mid = left + (right - left) // 2
+            if nums[mid] < nums[mid + 1]:
+                left = mid + 1
             else:
                 right = mid
         return left
 
-if __name__ == '__main__':
-    nums= [1,2,3,1]
-    obj = Solution().findPeakElement(nums)
 
+if __name__ == '__main__':
+    nums = [1, 2, 3, 1]
+    obj = Solution().findPeakElement(nums)
