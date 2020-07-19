@@ -93,23 +93,22 @@ class sort:
         median = int(len(ary) / 2)  # 二分分解
         left = self.Merge_sort(ary[:median])
         right = self.Merge_sort(ary[median:])
+        return self.merge(left, right)  # 合并数组
 
-        def merge(left: list, right: list) -> list:
-            """合并操作，
-                将两个有序数组left[]和right[]合并成一个大的有序数组"""
-            res = []
-            i = j = 0
-            while i < len(left) and j < len(right):
-                if left[i] < right[j]:
-                    res.append(left[i])
-                    i += 1
-                else:
-                    res.append(right[j])
-                    j += 1
-            res = res + left[i:] + right[j:]
-            return res
-
-        return merge(left, right)  # 合并数组
+    def merge(self, left: list, right: list) -> list:
+        """合并操作，
+            将两个有序数组left[]和right[]合并成一个大的有序数组"""
+        res = []
+        i = j = 0
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                res.append(left[i])
+                i += 1
+            else:
+                res.append(right[j])
+                j += 1
+        res = res + left[i:] + right[j:]
+        return res
 
     # 六、快速排序 QuickSort
     """
@@ -135,7 +134,7 @@ class sort:
         while left < right:
             while left < right and ary[right] >= key:
                 right -= 1
-            if left < right:  # 说明打破while循环的原因是ary[right] <= key
+            if left < right:  # 说明打破while循环的原因是ary[right] < key
                 ary[left] = ary[right]
                 left += 1
             while left < right and ary[left] < key:
@@ -149,23 +148,129 @@ class sort:
         self.qsort(ary, left + 1, end)
         return ary
 
-    # 七、堆排序 HeapSort
+    # arr[] --> 排序数组
+    # low  --> 起始索引
+    # high  --> 结束索引
+    # 快速排序函数
+    def quickSort_2(self, arr, low, high):
+        if low < high:
+            pi = self.partition(arr, low, high)
+            self.quickSort_2(arr, low, pi - 1)
+            self.quickSort_2(arr, pi + 1, high)
 
-    # 八、基数排序
+    def partition(self, arr, low, high):
+        i = (low - 1)  # 最小元素索引
+        pivot = arr[high]
+        for j in range(low, high):
+            # 当前元素小于或等于 pivot
+            if arr[j] <= pivot:
+                i = i + 1
+                arr[i], arr[j] = arr[j], arr[i]
+        arr[i + 1], arr[high] = arr[high], arr[i + 1]
+        return i + 1
+
+    # 七、堆排序 HeapSort
+    def heap_sort(self, ary: list):
+        n = len(ary)
+        first = int(n / 2 - 1)  # 最后一个非叶子节点
+        for start in range(first, -1, -1):  # 构建最大堆
+            self.max_heapify(ary, start, n - 1)
+        for end in range(n - 1, 0, -1):  # 堆排，将最大跟堆转换成有序数组
+            ary[end], ary[0] = ary[0], ary[end]  # 将根节点元素与最后叶子节点进行互换，取出最大根节点元素，对剩余节点重新构建最大堆
+            self.max_heapify(ary, 0, end - 1)  # 因为end上面取的是n-1，故而这里直接放end-1，相当于忽略了最后最大根节点元素ary[n-1]
+        return ary
+
+    # 最大堆调整：将堆的末端子节点做调整，使得子节点永远小于父节点
+    # start 为当前需要调整最大堆的位置。
+    def max_heapify(self, ary: list, start: int, end: int):
+        root = start
+        while True:
+            child = root * 2 + 1  # 找到左子节点
+            if child > end:  # 如果左子节点超过最后一个元素
+                break
+            if child + 1 <= end and ary[child] < ary[child + 1]:
+                child = child + 1  # 如果左子节点比较大
+            if ary[root] < ary[child]:  # 选择较大元素成为父节点
+                ary[root], ary[child] = ary[child], ary[root]
+                root = child
+            else:
+                break
+
+    # 八、计数排序
+    def counting_sort(self, arr: list, maxValue: int) -> list:
+        bucketlen = maxValue + 1
+        bucket = [0] * bucketlen
+        sortIndex = 0
+        arrlen = len(arr)
+        for i in range(arrlen):
+            if not bucket[arr[i]]:
+                bucket[arr[i]] = 0
+            bucket[arr[i]] += 1
+        for j in range(bucketlen):
+            while bucket[j] > 0:
+                arr[sortIndex] = j
+                sortIndex += 1
+                bucket[j] -= 1
+        return arr
+
+    # 九、基数排序
+    def radix_sort(self, arr: list):
+        """基数排序"""
+        i = 0  # 记录当前正在排拿一位，最低位为1
+        max_num = max(arr)  # 最大值
+        j = len(str(max_num))  # 记录最大值的位数
+        while i < j:
+            bucket_list = [[] for _ in range(10)]  # 初始化桶数组
+            for x in arr:
+                bucket_list[int(x / (10 ** i)) % 10].append(x)  # 找到位置放入桶数组
+            arr.clear()
+            for x in bucket_list:  # 放回原序列
+                for y in x:
+                    arr.append(y)
+            i += 1
+        return arr
+
+    # 十、桶排序
+    def bucket_sort(self, arr: list):
+        if not arr:
+            return 0
+        maxValue = max(arr)
+        bucket = [0] * (maxValue + 1)
+        sort_list = []
+        for i in arr:
+            bucket[i] += 1
+        for j in range(len(bucket)):
+            if bucket[j] != 0:
+                for k in range(bucket[j]):
+                    sort_list.append(j)
+        return sort_list
 
 
 if __name__ == '__main__':
     l = [123, 42, 543, 345, 12, 321, 12]
-    # begin_time = time()
+    # arr = [10, 7, 8, 9, 1, 5]
 
-    # sort().bubble_sort(l)
-    # sort().select_sort(l)
-    # sort().insert_sort(l)
-    # sort().shell_sort(l)
-    # ll = sort().Merge_sort(l)
-    ll = sort().quick_sort(l)
+    # sort().bubble_sort(l) #冒泡
+    # sort().select_sort(l) #选择
+    # sort().insert_sort(l) #插入
+    # sort().shell_sort(l)  #希尔
+    # ll = sort().Merge_sort(l) #归并
+    # ll = sort().quick_sort(l) #快速
+    # ll = sort().heap_sort(l)  # 堆排序
+    # ll = sort().counting_sort(l,max(l)) #计数排序
+    # ll = sort().radix_sort(l)  # 基数排序
+    # ll = sort().bucket_sort(l)
+    # 第二个快速排序
+
+    n = len(l)
+    sort().quickSort_2(l, 0, n - 1)
+    print("排序后的数组:")
+    for i in range(n):
+        print("%d" % l[i])
+
+    # begin_time = time()
 
     # end_time = time()
     # runtime = end_time - begin_time
     # print(runtime)
-    print(ll)
+    # print(ll)

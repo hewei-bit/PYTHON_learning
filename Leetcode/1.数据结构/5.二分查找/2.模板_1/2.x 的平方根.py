@@ -24,6 +24,7 @@ class Solution:
                 left = mid + 1
             else:
                 right = mid - 1
+        ans = mid
         return ans
 
 

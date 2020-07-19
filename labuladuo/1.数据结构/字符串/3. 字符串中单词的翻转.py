@@ -13,15 +13,14 @@
 解释: 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。
 
 """
-'''方法一'''
+'''
+方法一
+'''
 
 
 class Solution:
     def reverseWords(self, s: str) -> str:
         return " ".join(s.split()[::-1])
-
-
-'''方法二'''
 
 
 class Solution2:

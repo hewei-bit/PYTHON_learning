@@ -63,7 +63,7 @@ class Solution:
         pre = float('-inf')
         stack = []
         node = root
-
+        # 中序遍历
         while stack or node:
             while node:
                 stack.append(node)
@@ -93,7 +93,7 @@ class Solution:
         if root.val < val:
             root.right = self.insertIntoBST(root.right, val)
         if root.val > val:
-            root.left = self.insertIntoBST(root.left)
+            root.left = self.insertIntoBST(root.left,val)
         return root
 
     # 6.在BST中删除一个数
