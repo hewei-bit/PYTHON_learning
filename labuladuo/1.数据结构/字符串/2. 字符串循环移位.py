@@ -10,6 +10,9 @@ class Solution:
     def stringcyclicshift(self, s: str, k: int):
         return s[-k:] + s[:-k]
 
+class Solution2:
+    def stringcyclicshift(self, s: str, k: int):
+        return s[-k:] + s[:-k]
 
 aaa = "abcd123"
 k = 3

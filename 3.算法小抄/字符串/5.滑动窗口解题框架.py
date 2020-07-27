@@ -98,7 +98,7 @@ class Solution:
                 # d是将移出窗口的字符
                 d = s[left]
                 # 左移窗口
-                left +=1
+                left += 1
                 # 进行窗口内数据的一系列更新
                 if need[d] > 0:
                     if window[d] == need[d]:

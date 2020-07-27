@@ -52,9 +52,12 @@ class Solution:
         return self.isValidBSThelp(root, None, None)
 
     def isValidBSThelp(self, root: TreeNode, min: TreeNode, max: TreeNode):
-        if not root: return True
-        if min and root.val <= min.val: return False
-        if max and root.val >= min.val: return False
+        if not root:
+            return True
+        if min and root.val <= min.val:
+            return False
+        if max and root.val >= min.val:
+            return False
         return self.isValidBSThelp(root.left, min, root) and self.isValidBSThelp(root.right, root, max)
 
     def isValidBST_iteration(self, root: TreeNode) -> bool:
@@ -93,7 +96,7 @@ class Solution:
         if root.val < val:
             root.right = self.insertIntoBST(root.right, val)
         if root.val > val:
-            root.left = self.insertIntoBST(root.left,val)
+            root.left = self.insertIntoBST(root.left, val)
         return root
 
     # 6.在BST中删除一个数
@@ -103,8 +106,10 @@ class Solution:
             # 找到了
         if root.val == key:
             # 左子树或者右子树为空
-            if root.left is None: return root.right
-            if root.right is None: return root.left
+            if root.left is None:
+                return root.right
+            if root.right is None:
+                return root.left
             # 左子树或右子树不为空
             # 获取右子树的最小值
             minNode = self.getmin(root.right)

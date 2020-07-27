@@ -27,15 +27,19 @@ from typing import List
 
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+
         m = len(grid)
-        if m == 0: return 0
         n = len(grid[0])
+        if m == 0:
+            return 0
         ans = 0
 
         def dfs(i, j):
+            # 超出范围，排除不合法
             if i < 0 or i >= m or j < 0 or j >= n: return 0
             if grid[i][j] == 0: return 0
             grid[i][j] = 0
+            # 做选择
             top = dfs(i + 1, j)
             bottom = dfs(i - 1, j)
             left = dfs(i, j - 1)
