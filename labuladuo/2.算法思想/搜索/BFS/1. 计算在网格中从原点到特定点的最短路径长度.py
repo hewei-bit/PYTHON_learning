@@ -1,4 +1,4 @@
-'''
+"""
 1091. Shortest Path in Binary Matrix(Medium)
 
 在一个 N × N 的方形网格中，每个单元格有两种状态：
@@ -17,7 +17,7 @@ C_k 位于 (N-1, N-1)（即，值为 grid[N-1][N-1]）
 如果不存在这样的路径，返回 -1 。
 
 
-'''
+"""
 
 
 class Solution:
