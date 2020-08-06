@@ -36,14 +36,15 @@ class Solution:
                 b = int(recList.pop())
                 a = int(recList.pop())
                 if i == "+":
-                    recList.append(str(a+b))
+                    recList.append(str(a + b))
                 elif i == "-":
-                    recList.append(str(a-b))
+                    recList.append(str(a - b))
                 elif i == "*":
-                    recList.append(str(a*b))
+                    recList.append(str(a * b))
                 elif i == "/":
-                    recList.append(str(int(a/b)))
+                    recList.append(str(int(a / b)))
         return int(recList[0])
+
 
 if __name__ == '__main__':
     l = ["4", "13", "5", "/", "+"]

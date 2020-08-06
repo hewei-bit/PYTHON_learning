@@ -30,8 +30,8 @@ class Solution:
                 return c
         return ''
 
-
-s = "abpcplea"
-d = ["ale", "apple", "monkey", "plea"]
-obj = Solution().findLongestWord(s,d)
-print(obj)
+if __name__ == '__main__':
+    s = "abpcplea"
+    d = ["ale", "apple", "monkey", "plea"]
+    obj = Solution().findLongestWord(s,d)
+    print(obj)

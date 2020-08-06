@@ -13,7 +13,7 @@ class Solution:
 
     # 方法一: 将int转化成str类型: 双向队列
     # 复杂度: O(n^2) [每次pop(0)都是O(n)..比较费时]
-    def isPalindrome1(x: int) -> bool:
+    def isPalindrome1(self,x: int) -> bool:
         lst = list(str(x))
         while len(lst) > 1:
             if lst.pop(0) != lst.pop():
@@ -22,7 +22,7 @@ class Solution:
 
     # 方法二: 将int转化成str类型: 双指针 (指针的性能一直都挺高的)
     # 复杂度: O(n)
-    def isPalindrome2(x: int) -> bool:
+    def isPalindrome2(self,x: int) -> bool:
         lst = list(str(x))
         L, R = 0, len(lst) - 1
         while L <= R:
@@ -101,7 +101,8 @@ class Solution:
             else:
                 return False
 
+if __name__ == '__main__':
 
-x = 10
-x = 10001
-print(Solution().isPalindrome(x))
+    x = 10
+    x = 10001
+    print(Solution().isPalindrome(x))
