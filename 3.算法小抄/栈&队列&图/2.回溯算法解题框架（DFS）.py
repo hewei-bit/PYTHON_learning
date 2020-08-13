@@ -28,6 +28,7 @@ class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         res = []
         track = []
+
         def backtrack(nums: List[int], track: List[int], res: List[List[int]]):
             # 触发条件
             if len(track) == len(nums):

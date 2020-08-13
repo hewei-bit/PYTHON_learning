@@ -19,3 +19,9 @@ def twoSum(nums, target):
         j = hashmap.get(target - num)
         if j is not None and i != j:
             return [i, j]
+
+
+if __name__ == "__main__":
+    nums = [2, 7, 11, 15]
+    target = 9
+    print(twoSum(nums,target))

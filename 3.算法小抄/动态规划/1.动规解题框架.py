@@ -54,12 +54,25 @@ class Solution3:
 # print(fib3(20))
 
 
-
-
 # 二、凑零钱问题
+"""
+def coinChange(coins: List[int], amount: int):
+    # 定义： 要凑出⾦额 n， ⾄少要 dp(n) 个硬币
+    def dp(n):
+        # 做选择， 选择需要硬币最少的那个结果
+        for coin in coins:
+        res = min(res, 1 + dp(n - coin))
+        return res
+    # 我们要求的问题是 dp(amount)
+    return dp(amount)
+
+"""
+
+
+
 # 1、暴力递归
 class Solution1_1:
-    def coinChange(self,coins: list, amount: int):
+    def coinChange(self, coins: list, amount: int):
         def dp(n):
             # base case
             if n == 0:
@@ -82,7 +95,7 @@ class Solution1_1:
 
 # 2、带备忘录的递归解法
 class Solution1_2:
-    def coinChange(self,coins: list, amount: int):
+    def coinChange(self, coins: list, amount: int):
         memo = dict()
 
         def dp(n):
@@ -107,7 +120,7 @@ class Solution1_2:
 
 # 3、dp 数组的迭代解法
 class Solution1_3:
-    def coinChange(self,coins: list, amount: int):
+    def coinChange(self, coins: list, amount: int):
         dp = [amount + 1] * (amount + 1)
         dp[0] = 0
         for i in range(len(dp)):
